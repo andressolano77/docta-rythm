@@ -10,16 +10,18 @@
   <meta property="og:description" content="Reggae, dancehall, dub y ska con energía de sound system. Contrataciones para clubes, festivales y eventos.">
   <meta property="og:image" content="assets/img/decks-smile.jpg">
   <meta property="og:type" content="website">
-  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/img/logo/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="assets/img/logo/favicon-180.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wdth,wght@62..125,400..900&family=Permanent+Marker&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css?v=3">
+  <link rel="stylesheet" href="assets/css/style.css?v=5">
 </head>
 <body class="is-loading">
 
   <!-- PRELOADER -->
   <div class="preloader" aria-hidden="true">
+    <img class="preloader__logo" src="assets/img/logo/logo-white.png" alt="" width="377" height="420">
     <div class="preloader__vinyl"><span></span></div>
     <p class="preloader__txt">Calentando el sound system</p>
     <p class="preloader__count"><span>0</span>%</p>
@@ -33,7 +35,7 @@
   <!-- NAV -->
   <header class="nav" id="nav">
     <a href="#inicio" class="nav__logo" aria-label="Docta Rythm Selecta, inicio">
-      <span class="logo-disc" aria-hidden="true"></span>
+      <img class="logo-img" src="assets/img/logo/logo-nav.png" alt="Call Di Docta Records" width="225" height="260">
       <span class="nav__word">DOCTA RYTHM<small>SELECTA</small></span>
     </a>
     <nav class="nav__links" aria-label="Principal">
@@ -117,6 +119,7 @@
             <img src="assets/img/decks-smile.jpg" alt="Docta Rythm sonriendo en la cabina" loading="lazy" width="544" height="662">
           </figure>
           <span class="bio__sticker">20+ años<br>en cabina</span>
+          <img class="bio__logo" src="assets/img/logo/logo-sticker.png" alt="Logo Call Di Docta Records" loading="lazy" width="507" height="560">
         </div>
 
         <div class="bio__text">
@@ -430,7 +433,7 @@
           <p class="reveal">Bio corta y larga, fotos oficiales, logos, datos de contacto y requerimientos técnicos en un solo lugar.</p>
           <div class="press__btns reveal">
             <a class="btn btn--gold magnetic" href="assets/press/docta-rythm-presskit.pdf" download><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg><span>Descargar EPK (PDF)</span></a>
-            <a class="btn btn--ghost magnetic" href="assets/press/docta-rythm-fotos.zip" download><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="m21 16-5-5-9 8"/></svg><span>Fotos HD (ZIP)</span></a>
+            <a class="btn btn--ghost magnetic" href="assets/press/docta-rythm-fotos.zip" download><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="m21 16-5-5-9 8"/></svg><span>Fotos y logos (ZIP)</span></a>
           </div>
           <button class="copy-bio reveal" id="copyBio" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3"/></svg><span>Copiar bio corta</span></button>
         </div>
@@ -440,9 +443,10 @@
     <!-- ============ FINAL CTA ============ -->
     <section class="final">
       <div class="wrap">
+        <div class="final__logo" aria-hidden="true"><img src="assets/img/logo/logo-3d.png" alt="" loading="lazy" width="1100" height="817"></div>
         <p class="hero__script reveal">¿Listos para la medicina?</p>
         <a href="#contrataciones" class="final__big magnetic" data-cursor="BOOK">
-          <span>CALL DI</span><span>DOCTA</span>
+          <span>RESERVÁ</span><span>TU FECHA</span>
         </a>
       </div>
     </section>
@@ -451,7 +455,7 @@
   <footer class="footer">
     <div class="wrap footer__grid">
       <div>
-        <a href="#inicio" class="nav__logo"><span class="logo-disc" aria-hidden="true"></span><span class="nav__word">DOCTA RYTHM<small>SELECTA</small></span></a>
+        <a href="#inicio" class="nav__logo"><img class="logo-img" src="assets/img/logo/logo-nav.png" alt="Call Di Docta Records" width="225" height="260"><span class="nav__word">DOCTA RYTHM<small>SELECTA</small></span></a>
         <p class="footer__tag">Serenity hidden in the city.</p>
       </div>
       <div class="footer__social" data-social></div>
@@ -495,6 +499,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
   <script src="https://w.soundcloud.com/player/api.js"></script>
-  <script src="assets/js/main.js?v=3"></script>
+  <script src="assets/js/main.js?v=4"></script>
 </body>
 </html>

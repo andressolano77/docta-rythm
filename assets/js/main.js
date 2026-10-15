@@ -299,6 +299,10 @@
     gsap.to('.booking__bg span:nth-child(odd)', { xPercent: -18, ease: 'none', scrollTrigger: { trigger: '.booking', scrub: true } });
     gsap.to('.booking__bg span:nth-child(even)', { xPercent: 12, ease: 'none', scrollTrigger: { trigger: '.booking', scrub: true } });
 
+    // Logos: sticker en la bio y logo 3D al final
+    gsap.from('.bio__logo', { scale: 0, rotate: -60, duration: 1.2, ease: 'back.out(1.8)', scrollTrigger: { trigger: '.bio__photos', start: 'top 60%' } });
+    gsap.from('.final__logo', { y: 100, scale: .6, rotateX: 50, opacity: 0, duration: 1.4, ease: 'expo.out', scrollTrigger: { trigger: '.final', start: 'top 80%' } });
+
     // Final CTA
     gsap.from('.final__big span', { yPercent: 60, opacity: 0, duration: 1.2, stagger: .12, ease: 'expo.out', scrollTrigger: { trigger: '.final', start: 'top 75%' } });
 
@@ -360,6 +364,18 @@
       });
       el.addEventListener('mouseleave', () => { el.style.rotate = ''; el.firstElementChild.style.transform = ''; });
     });
+  }
+
+  // Logo 3D sigue al mouse
+  const finalLogo = $('.final__logo');
+  if (finePointer && !reduceMotion && finalLogo) {
+    finalLogo.addEventListener('mousemove', e => {
+      const r = finalLogo.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+      finalLogo.style.transform = `perspective(900px) rotateY(${x * 18}deg) rotateX(${-y * 14}deg)`;
+    });
+    finalLogo.addEventListener('mouseleave', () => { finalLogo.style.transform = ''; });
+    finalLogo.style.transition = 'transform .4s cubic-bezier(.2,.7,.1,1)';
   }
 
   // ---- Custom cursor ------------------------------------------
