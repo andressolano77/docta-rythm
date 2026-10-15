@@ -739,3 +739,38 @@ strong { color: var(--bone); font-weight: 700; }
 .final__logo img { width: 100%; height: auto; filter: drop-shadow(0 30px 50px rgba(0,0,0,.7)); animation: logoFloat 6s ease-in-out infinite; }
 @keyframes logoFloat { 0%, 100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-18px) rotate(2deg); } }
 @media (max-width: 699px) { .logo-img { height: 40px; } .nav__word { font-size: 1.1rem; } }
+
+/* ---------- Ajustes validación visual ---------- */
+/* Radio compacta en escritorio fuera del hero: se expande al pasar el mouse */
+@media (min-width: 1000px) {
+  .radio.is-compact:not(:hover):not(:focus-within) { padding-right: 14px; gap: 10px; }
+  .radio.is-compact:not(:hover):not(:focus-within) .radio__info,
+  .radio.is-compact:not(:hover):not(:focus-within) .radio__vol,
+  .radio.is-compact:not(:hover):not(:focus-within) .radio__ext { display: none; }
+}
+.radio__label { overflow: hidden; text-overflow: ellipsis; }
+/* Móvil: con la barra de "Contratar" visible, la radio se controla desde su botón */
+@media (max-width: 999px) {
+  body.has-sticky .radio { transform: translateY(calc(100% + 140px)); pointer-events: none; }
+  .sticky-cta__play { position: relative; width: auto; min-width: 48px; padding: 0 12px; gap: 6px; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center; }
+  .sticky-cta__play svg { width: 16px; height: 16px; margin: 0; }
+  .sticky-cta__play .i-pause { display: none; }
+  body[data-radio="playing"] .sticky-cta__play .i-play, body[data-radio="loading"] .sticky-cta__play .i-play { display: none; }
+  body[data-radio="playing"] .sticky-cta__play .i-pause, body[data-radio="loading"] .sticky-cta__play .i-pause { display: block; }
+  body[data-radio="playing"] .sticky-cta__play { background: var(--gold); color: var(--ink); }
+  body[data-radio="blocked"] .sticky-cta__play { animation: ring 1.8s infinite; }
+  .sticky-cta__radio { font-size: .7rem; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; }
+  .footer { padding-bottom: 100px; }
+}
+.radio-cta { justify-content: flex-start; text-align: left; line-height: 1.3; }
+@media (max-width: 639px) {
+  .vcard--feat .vcard__play { width: 64px; height: 64px; }
+  .vcard--feat .vcard__title { max-width: 100%; }
+  .event__thumb { max-width: 200px; }
+}
+@media (min-width: 1000px) { .radio__info { flex: 1 0 auto; } .radio { max-width: 560px; } }
+@media (max-width: 699px) { .radio__label { letter-spacing: .06em; gap: 5px; } }
+@media (max-width: 699px) {
+  .radio__ext { display: none; }
+  .radio:not([data-state="playing"]) .radio__eq { display: none; }
+}

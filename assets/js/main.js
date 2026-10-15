@@ -112,8 +112,8 @@
   const t0 = performance.now();
   const tick = () => {
     const target = Math.min(100, (loaded / toLoad.length) * 100);
-    const minTime = Math.min(100, ((performance.now() - t0) / 1400) * 100);
-    progress += (Math.min(target, minTime) - progress) * 0.12 + 0.3;
+    const minTime = Math.min(100, ((performance.now() - t0) / 700) * 100);
+    progress += (Math.min(target, minTime) - progress) * 0.2 + 0.8;
     progress = Math.min(progress, 100);
     countEl.textContent = Math.floor(progress);
     stripes.forEach((s, i) => s.style.setProperty('--p', Math.max(0, Math.min(1, (progress - i * 15) / 70))));
@@ -131,8 +131,8 @@
     setTimeout(radioAutostart, animOn ? 1600 : 300);
     if (!animOn) { pre.remove(); afterIntro(); return; }
     const tl = gsap.timeline({ onComplete: afterIntro });
-    tl.to('.preloader__vinyl, .preloader__txt, .preloader__count', { y: -30, opacity: 0, duration: .5, stagger: .05, ease: 'power2.in' })
-      .to(pre, { clipPath: 'inset(0 0 100% 0)', duration: 1, ease: 'expo.inOut' }, '-=.1')
+    tl.to('.preloader__vinyl, .preloader__txt, .preloader__count', { y: -30, opacity: 0, duration: .35, stagger: .04, ease: 'power2.in' })
+      .to(pre, { clipPath: 'inset(0 0 100% 0)', duration: .8, ease: 'expo.inOut' }, '-=.1')
       .set(pre, { display: 'none' })
       .from('.hero__slide.is-active', { scale: 1.35, duration: 2.2, ease: 'expo.out' }, '-=.8')
       .from('.hero__title .ch', { yPercent: 115, rotate: 8, duration: 1.1, stagger: .045, ease: 'expo.out' }, '-=2')
@@ -217,6 +217,7 @@
     const stickyOn = y > innerHeight * .8 && !inBooking;
     sticky.classList.toggle('is-on', stickyOn);
     document.body.classList.toggle('has-sticky', stickyOn);
+    const rEl = $('#radio'); if (rEl) rEl.classList.toggle('is-compact', y > innerHeight * .8);
     lastY = y;
   };
   addEventListener('scroll', onScroll, { passive: true }); onScroll();
@@ -486,8 +487,9 @@
 
   const setRadio = st => {
     radioEl.dataset.state = st;
+    document.body.dataset.radio = st;
     rBtn.setAttribute('aria-label', st === 'playing' || st === 'loading' ? 'Pausar radio' : 'Reproducir radio');
-    rStatus.textContent = st === 'blocked' ? 'Tocá para escuchar' : st === 'error' ? 'Sin señal' : 'En vivo';
+    rStatus.textContent = st === 'blocked' ? 'Tocá play' : st === 'error' ? 'Sin señal' : 'En vivo';
     eqBoost = st === 'playing' || playing ? 1 : 0;
   };
 
@@ -525,7 +527,7 @@
   function onFirstGesture(e) {
     if (!radioWanted) return disarmUnlock();
     const t = e.target && e.target.closest ? e.target : null;
-    if (t && t.closest('[data-no-autoradio], .radio, [data-radio-play]')) return;
+    if (t && t.closest('[data-no-autoradio], .radio, [data-radio-play], #stickyRadio')) return;
     disarmUnlock();
     radioPlay();
   }
@@ -556,6 +558,7 @@
     if (a && a.tagName === 'IFRAME' && a.closest('.spotify')) mediaStarted('spotify');
   }, 0));
 
+  $('#stickyRadio').addEventListener('click', () => rBtn.click());
   rBtn.addEventListener('click', () => {
     const st = radioEl.dataset.state;
     if (st === 'playing' || st === 'loading') {
