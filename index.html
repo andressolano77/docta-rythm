@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Docta Rythm Selecta — El Doctor del Ritmo</title>
+  <meta name="description" content="Docta Rythm Selecta: selecta de reggae roots, dancehall, dub y ska desde San José, Costa Rica. Sesiones, videos, agenda y contrataciones para clubes, festivales y empresas.">
+  <meta name="theme-color" content="#0b0a08">
+  <meta property="og:title" content="Docta Rythm Selecta — El Doctor del Ritmo">
+  <meta property="og:description" content="Reggae, dancehall, dub y ska con energía de sound system. Contrataciones para clubes, festivales y eventos.">
+  <meta property="og:image" content="assets/img/decks-smile.jpg">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wdth,wght@62..125,400..900&family=Permanent+Marker&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css?v=1">
+</head>
+<body class="is-loading">
+
+  <!-- PRELOADER -->
+  <div class="preloader" aria-hidden="true">
+    <div class="preloader__vinyl"><span></span></div>
+    <p class="preloader__txt">Calentando el sound system</p>
+    <p class="preloader__count"><span>0</span>%</p>
+    <div class="preloader__stripes"><i></i><i></i><i></i></div>
+  </div>
+
+  <!-- CURSOR -->
+  <div class="cursor" aria-hidden="true"><span class="cursor__dot"></span><span class="cursor__ring"><em>PLAY</em></span></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- NAV -->
+  <header class="nav" id="nav">
+    <a href="#inicio" class="nav__logo" aria-label="Docta Rythm Selecta, inicio">
+      <span class="logo-disc" aria-hidden="true"></span>
+      <span class="nav__word">DOCTA RYTHM<small>SELECTA</small></span>
+    </a>
+    <nav class="nav__links" aria-label="Principal">
+      <a href="#bio">Bio</a>
+      <a href="#musica">Música</a>
+      <a href="#videos">Videos</a>
+      <a href="#agenda">Agenda</a>
+      <a href="#prensa">Prensa</a>
+    </nav>
+    <a href="#contrataciones" class="btn btn--gold btn--sm nav__cta magnetic">Contratar</a>
+    <button class="nav__burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu"><span></span><span></span></button>
+  </header>
+
+  <div class="menu" id="menu" aria-hidden="true">
+    <nav class="menu__links" aria-label="Menú móvil">
+      <a href="#inicio"><i>01</i>Inicio</a>
+      <a href="#bio"><i>02</i>Bio</a>
+      <a href="#musica"><i>03</i>Música</a>
+      <a href="#videos"><i>04</i>Videos</a>
+      <a href="#agenda"><i>05</i>Agenda</a>
+      <a href="#contrataciones"><i>06</i>Contratar</a>
+      <a href="#prensa"><i>07</i>Prensa</a>
+    </nav>
+    <div class="menu__social" data-social></div>
+  </div>
+
+  <main>
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="inicio">
+      <div class="hero__media" aria-hidden="true">
+        <div class="hero__slide is-active" style="background-image:url(assets/img/decks-smile.jpg)"></div>
+        <div class="hero__slide" style="background-image:url(assets/img/booth-mercadito.jpg)"></div>
+        <div class="hero__slide" style="background-image:url(assets/img/portrait-bw.jpg)"></div>
+      </div>
+      <div class="hero__shade" aria-hidden="true"></div>
+
+      <div class="hero__inner">
+        <p class="eyebrow hero__eyebrow"><span class="live-dot"></span> San José · Costa Rica · Desde 2005</p>
+        <h1 class="hero__title" aria-label="Docta Rythm">
+          <span class="hero__line"><span class="split">DOCTA</span></span>
+          <span class="hero__line hero__line--outline"><span class="split">RYTHM</span></span>
+        </h1>
+        <p class="hero__script">El Doctor del Ritmo</p>
+        <p class="hero__lead">Reggae roots, dancehall, dub y ska con energía de sound system. Para clubes, festivales y marcas que quieren la pista llena.</p>
+        <div class="hero__ctas">
+          <a href="#contrataciones" class="btn btn--gold magnetic"><span>Contratar ahora</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a href="#musica" class="btn btn--ghost magnetic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor" stroke="none"/></svg><span>Escuchar sesiones</span></a>
+        </div>
+      </div>
+
+      <a href="#contrataciones" class="hero__badge" aria-label="Reservar fecha">
+        <svg viewBox="0 0 200 200" aria-hidden="true">
+          <defs><path id="circ" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs>
+          <text><textPath href="#circ" textLength="486" lengthAdjust="spacing">RESERVÁ TU FECHA ✦ CALL DI DOCTA ✦ 2005–2026 ✦ </textPath></text>
+        </svg>
+        <span class="hero__badge-core"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+      </a>
+
+      <canvas class="hero__eq" aria-hidden="true"></canvas>
+      <div class="hero__scroll" aria-hidden="true"><span>Scroll</span><i></i></div>
+    </section>
+
+    <!-- ============ MARQUEE ============ -->
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker__row ticker__row--gold"><div class="ticker__track">
+        <span>Reggae Roots</span><b>✦</b><span>Dancehall</span><b>✦</b><span>Dub</span><b>✦</b><span>Rocksteady</span><b>✦</b><span>Ska</span><b>✦</b><span>Soca</span><b>✦</b><span>Ragga</span><b>✦</b>
+      </div></div>
+      <div class="ticker__row ticker__row--green"><div class="ticker__track ticker__track--rev">
+        <span>Rototom Sunsplash 2025</span><b>✦</b><span>Call Di Docta Records</span><b>✦</b><span>Dancehall Madness CR</span><b>✦</b><span>The Aces Sounds</span><b>✦</b>
+      </div></div>
+    </div>
+
+    <!-- ============ BIO ============ -->
+    <section class="section bio" id="bio">
+      <div class="wrap bio__grid">
+        <div class="bio__photos">
+          <figure class="bio__ph bio__ph--main tilt" data-parallax="-8">
+            <img src="assets/img/portrait-bw.jpg" alt="Retrato en blanco y negro de Docta Rythm Selecta" loading="lazy" width="524" height="699">
+          </figure>
+          <figure class="bio__ph bio__ph--small tilt" data-parallax="12">
+            <img src="assets/img/decks-smile.jpg" alt="Docta Rythm sonriendo en la cabina" loading="lazy" width="544" height="662">
+          </figure>
+          <span class="bio__sticker">20+ años<br>en cabina</span>
+        </div>
+
+        <div class="bio__text">
+          <p class="eyebrow reveal">02 — Biografía</p>
+          <h2 class="h2 reveal-lines">Receta del doctor: <em>ritmo en dosis altas.</em></h2>
+          <p class="lead reveal">Docta Rythm Selecta es una de las voces del sound system costarricense. Desde 2005 mueve pistas con reggae roots, dancehall, dub, rocksteady y ska.</p>
+          <p class="reveal">Fundador de <strong>Call Di Docta Records</strong> y la fiesta <strong>Dancehall Madness CR</strong>, parte de <strong>The Aces Sounds</strong> y alter ego ska como <strong>El Doctor Ska</strong>. Productor de riddims, radio host y selecta que lleva la cultura jamaiquina con sabor tico, de los clubes de San José al <strong>Rototom Sunsplash</strong> en España.</p>
+          <p class="reveal">Su set: lectura de pista, vinilo en el alma y micrófono encendido. Del warm up más fino al peak time más ragga.</p>
+
+          <ul class="stats">
+            <li class="reveal"><b data-count="2005" data-from="1990">2005</b><span>Primer set</span></li>
+            <li class="reveal"><b data-count="25.7" data-suffix="K" data-dec="1">25.7K</b><span>Seguidores IG</span></li>
+            <li class="reveal"><b data-count="174" data-suffix="K">174K</b><span>Plays mixtape T.O.K.</span></li>
+            <li class="reveal"><b data-count="108">108</b><span>Tracks y sesiones</span></li>
+          </ul>
+
+          <ul class="chips reveal">
+            <li>Reggae Roots</li><li>Dancehall</li><li>Dub</li><li>Rocksteady</li><li>Ska</li><li>Soca</li><li>Hip Hop</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ STAGES SHARED ============ -->
+    <section class="stages" aria-labelledby="stages-h">
+      <div class="wrap">
+        <p class="eyebrow reveal" id="stages-h">Escenarios y carteles compartidos</p>
+      </div>
+      <ul class="stages__list">
+        <li>Sizzla</li><li>Gentleman</li><li>T.O.K.</li><li>Mr. Vegas</li><li>Capleton</li><li>Charly Black</li><li>Non Palidece</li><li>Laguna Pai</li><li>Shel Dixon</li><li>Rototom Sunsplash</li>
+      </ul>
+    </section>
+
+    <!-- ============ MUSIC ============ -->
+    <section class="section music" id="musica">
+      <div class="wrap">
+        <div class="section__head">
+          <p class="eyebrow reveal">03 — Música y sesiones</p>
+          <h2 class="h2 reveal-lines">Dale play. <em>Sentí la pista.</em></h2>
+          <p class="section__sub reveal">Mixtapes, riddims y sets grabados en vivo. Elegí una sesión y el tocadiscos hace el resto.</p>
+        </div>
+
+        <div class="deck reveal">
+          <div class="deck__table">
+            <div class="deck__platter">
+              <div class="vinyl" id="vinyl">
+                <div class="vinyl__label"><img src="assets/img/profile.jpg" alt="" width="304" height="304"></div>
+              </div>
+            </div>
+            <div class="deck__arm" id="tonearm"><i></i></div>
+            <div class="deck__leds"><i></i><i></i><i></i></div>
+            <div class="deck__now">
+              <span class="deck__now-label">Sonando</span>
+              <strong id="nowTitle">T.O.K. Promo Mixtape</strong>
+            </div>
+            <button class="deck__play" id="deckPlay" aria-label="Reproducir"><svg class="i-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><svg class="i-pause" viewBox="0 0 24 24"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg></button>
+          </div>
+
+          <div class="deck__side">
+            <ol class="tracks" id="tracks">
+              <li><button class="track is-active" data-url="https://soundcloud.com/doctarythmselecta/tok-official-promo-mixtape-by-docta-rythm-selecta2018" data-title="T.O.K. Promo Mixtape"><span class="track__n">01</span><span class="track__t">T.O.K. Promo Mixtape<small>Reggae · Dancehall · 174K plays</small></span><span class="track__bars"><i></i><i></i><i></i></span></button></li>
+              <li><button class="track" data-url="https://soundcloud.com/doctarythmselecta/classic-session-10mo" data-title="Classic Session 10mo Aniversario"><span class="track__n">02</span><span class="track__t">Classic Session · 10mo Aniversario<small>Sesión en vivo · 2026</small></span><span class="track__bars"><i></i><i></i><i></i></span></button></li>
+              <li><button class="track" data-url="https://soundcloud.com/doctarythmselecta/ragga-ragga-set-by-docta-rythm" data-title="Ragga Ragga Set"><span class="track__n">03</span><span class="track__t">Ragga Ragga Set<small>Dancehall · 2025</small></span><span class="track__bars"><i></i><i></i><i></i></span></button></li>
+              <li><button class="track" data-url="https://soundcloud.com/doctarythmselecta/soca-en-playa-cocles-by-docta" data-title="Soca en Playa Cocles"><span class="track__n">04</span><span class="track__t">Soca en Playa Cocles<small>Caribe sur · 2026</small></span><span class="track__bars"><i></i><i></i><i></i></span></button></li>
+              <li><button class="track" data-url="https://soundcloud.com/doctarythmselecta/connection-docta-rythm-burning" data-title="Connection ft. Rasteiro"><span class="track__n">05</span><span class="track__t">Connection — Docta Rythm &amp; Burning Sax ft. Rasteiro<small>Producción original · 2026</small></span><span class="track__bars"><i></i><i></i><i></i></span></button></li>
+              <li><button class="track" data-url="https://soundcloud.com/doctarythmselecta/sets/doctas-birthday-bash-dancehall" data-title="Docta's Birthday Bash"><span class="track__n">06</span><span class="track__t">Docta's Birthday Bash — Dancehall Madness<small>Playlist · 2024</small></span><span class="track__bars"><i></i><i></i><i></i></span></button></li>
+              <li><button class="track" data-url="https://soundcloud.com/doctarythmselecta/sets/call-di-docta-riddim-2022" data-title="Call Di Docta Riddim"><span class="track__n">07</span><span class="track__t">Call Di Docta Riddim<small>Riddim · 2022</small></span><span class="track__bars"><i></i><i></i><i></i></span></button></li>
+            </ol>
+            <div class="sc-wrap">
+              <iframe id="scPlayer" title="Reproductor de SoundCloud" allow="autoplay" loading="lazy"
+                src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/doctarythmselecta/tok-official-promo-mixtape-by-docta-rythm-selecta2018&amp;color=%23f6c429&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=true&amp;show_reposts=false&amp;visual=false"></iframe>
+            </div>
+          </div>
+        </div>
+
+        <div class="spotify reveal">
+          <div class="spotify__txt">
+            <p class="eyebrow">También en Spotify</p>
+            <p>Producciones y riddims de Call Di Docta Records.</p>
+            <a class="link-arrow" href="https://soundcloud.com/doctarythmselecta" target="_blank" rel="noopener">Ver las 108 sesiones en SoundCloud →</a>
+          </div>
+          <iframe title="Docta Rythm en Spotify" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            src="https://open.spotify.com/embed/artist/25P6JrY91mpiTqMJ50JpEH?utm_source=generator&amp;theme=0"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ VIDEOS ============ -->
+    <section class="section videos" id="videos">
+      <div class="wrap">
+        <div class="section__head section__head--row">
+          <div>
+            <p class="eyebrow reveal">04 — En vivo</p>
+            <h2 class="h2 reveal-lines">Así suena <em>la pista llena.</em></h2>
+          </div>
+          <a href="https://www.youtube.com/@CallDiDoctaMovement" target="_blank" rel="noopener" class="link-arrow reveal">Canal Call Di Docta Movement →</a>
+        </div>
+
+        <div class="vgrid">
+          <button class="vcard vcard--feat reveal" data-yt="wGGGM6Zz1qA" data-ext>
+            <img src="https://i.ytimg.com/vi/wGGGM6Zz1qA/hqdefault.jpg" alt="" loading="lazy">
+            <span class="vcard__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="vcard__tag">Festival · España</span>
+            <span class="vcard__title">Rototom Sunsplash 2025 — Set 2000s Dancehall</span>
+          </button>
+          <button class="vcard reveal" data-yt="2POp29wcTtc" data-ext>
+            <img src="https://i.ytimg.com/vi/2POp29wcTtc/hqdefault.jpg" alt="" loading="lazy">
+            <span class="vcard__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="vcard__tag">Rototom Sunbeach</span>
+            <span class="vcard__title">Del warm up al dancehall</span>
+          </button>
+          <button class="vcard reveal" data-yt="5rJdvFVRaaA">
+            <img src="https://i.ytimg.com/vi/5rJdvFVRaaA/hqdefault.jpg" alt="" loading="lazy">
+            <span class="vcard__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="vcard__tag">Club · San José</span>
+            <span class="vcard__title">Dancehall warm up previo a Shel Dixon</span>
+          </button>
+          <button class="vcard reveal" data-yt="bC5ayQYZiSM" data-ext>
+            <img src="https://i.ytimg.com/vi/bC5ayQYZiSM/hqdefault.jpg" alt="" loading="lazy">
+            <span class="vcard__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="vcard__tag">Show</span>
+            <span class="vcard__title">SharkLion &amp; Docta — Dancing show</span>
+          </button>
+          <button class="vcard reveal" data-yt="MzH2LAl-R-g">
+            <img src="https://i.ytimg.com/vi/MzH2LAl-R-g/hqdefault.jpg" alt="" loading="lazy">
+            <span class="vcard__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="vcard__tag">Aniversario</span>
+            <span class="vcard__title">Call Di Docta Records — 10 años</span>
+          </button>
+          <button class="vcard reveal" data-yt="WLqOzKH2prM">
+            <img src="https://i.ytimg.com/vi/WLqOzKH2prM/hqdefault.jpg" alt="" loading="lazy">
+            <span class="vcard__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="vcard__tag">Archivo · 2010</span>
+            <span class="vcard__title">Capleton en Club Vertigo, Costa Rica</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ GALLERY (horizontal) ============ -->
+    <section class="gallery" id="galeria" aria-label="Galería">
+      <div class="gallery__pin">
+        <div class="gallery__head">
+          <p class="eyebrow">Galería</p>
+          <h2 class="h2">Vibra <em>en vivo</em></h2>
+        </div>
+        <div class="gallery__track">
+          <figure class="gcard"><img src="assets/img/booth-mercadito.jpg" alt="Docta Rythm en la cabina de Mercadito" loading="lazy"><figcaption>Mercadito · San José</figcaption></figure>
+          <figure class="gcard gcard--tall"><img src="assets/img/decks-smile.jpg" alt="Docta Rythm mezclando" loading="lazy"><figcaption>Selecta mode</figcaption></figure>
+          <figure class="gcard gcard--tall"><img src="assets/img/stage-live.jpg" alt="Show en vivo con artistas invitados" loading="lazy"><figcaption>Live show</figcaption></figure>
+          <figure class="gcard gcard--tall"><img src="assets/img/green-ranger.jpg" alt="Docta Rythm con casco verde" loading="lazy"><figcaption>Dancehalloween</figcaption></figure>
+          <figure class="gcard gcard--tall"><img src="assets/img/stage-mc.jpg" alt="Artista cantando en escenario" loading="lazy"><figcaption>Reggae nights</figcaption></figure>
+          <figure class="gcard gcard--tall"><img src="assets/img/reggaevolution.jpg" alt="Docta Rythm en Reggaevolution, Radio U" loading="lazy"><figcaption>Radio U · Reggaevolution</figcaption></figure>
+          <figure class="gcard gcard--tall"><img src="assets/img/stage-lioness.jpg" alt="Artista en escenario con luces verdes" loading="lazy"><figcaption>Dancehall Madness</figcaption></figure>
+          <figure class="gcard gcard--tall"><img src="assets/img/stage-green.jpg" alt="Cantante con micrófono" loading="lazy"><figcaption>Mic in hand</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ AGENDA ============ -->
+    <section class="section agenda" id="agenda">
+      <div class="wrap">
+        <div class="section__head">
+          <p class="eyebrow reveal">05 — Agenda</p>
+          <h2 class="h2 reveal-lines">Próximas <em>fechas.</em></h2>
+        </div>
+
+        <ul class="events" id="events">
+          <li class="event reveal" data-date="2026-10-30" data-flyer="assets/img/flyer-dancehalloween.jpg">
+            <div class="event__date"><b>30</b><span>OCT<br>2026</span></div>
+            <div class="event__body">
+              <h3>Dancehalloween</h3>
+              <p>Special guest junto a Mr. Vegas, Charly Black y Gaza Slim.</p>
+              <p class="event__place">C. Eventos La Uruca · San José, CR</p>
+            </div>
+            <img class="event__thumb" src="assets/img/flyer-dancehalloween.jpg" alt="Afiche Dancehalloween 2026" loading="lazy">
+            <a class="btn btn--line btn--sm" href="https://www.omticket.com" target="_blank" rel="noopener">Entradas</a>
+          </li>
+          <li class="event reveal" data-date="2026-12-13" data-flyer="assets/img/flyer-nonpalidece.jpg">
+            <div class="event__date"><b>13</b><span>DIC<br>2026</span></div>
+            <div class="event__body">
+              <h3>Non Palidece 30 años — CRC 2026</h3>
+              <p>DJ set junto a Ojo de Buey, Selecta Herbalist y Marvin Selector.</p>
+              <p class="event__place">Mercadito · San José, CR</p>
+            </div>
+            <img class="event__thumb" src="assets/img/flyer-nonpalidece.jpg" alt="Afiche Non Palidece CRC 2026" loading="lazy">
+            <a class="btn btn--line btn--sm" href="https://www.instagram.com/doctarythmselecta/" target="_blank" rel="noopener">Info</a>
+          </li>
+          <li class="event event--cta reveal">
+            <div class="event__date"><b>??</b><span>TU<br>FECHA</span></div>
+            <div class="event__body">
+              <h3>Tu club, festival o evento</h3>
+              <p>Hay fechas disponibles para 2026–2027. Aseguralas antes que se llenen.</p>
+            </div>
+            <a class="btn btn--gold btn--sm magnetic" href="#contrataciones">Reservar</a>
+          </li>
+        </ul>
+        <div class="flyer-follow" aria-hidden="true"><img alt=""></div>
+      </div>
+    </section>
+
+    <!-- ============ BOOKING ============ -->
+    <section class="section booking" id="contrataciones">
+      <div class="booking__bg" aria-hidden="true"><span>BOOK</span><span>THE</span><span>DOCTA</span></div>
+      <div class="wrap">
+        <div class="section__head">
+          <p class="eyebrow reveal">06 — Contrataciones</p>
+          <h2 class="h2 h2--xl reveal-lines">Llevá el sound system <em>a tu evento.</em></h2>
+          <p class="section__sub reveal">Contanos la fecha y el tipo de evento. Respondemos en 24–48 h con disponibilidad y propuesta.</p>
+        </div>
+
+        <div class="formats">
+          <article class="format reveal">
+            <span class="format__ico" aria-hidden="true">
+              <svg viewBox="0 0 48 48"><rect x="10" y="6" width="28" height="36" rx="3"/><circle cx="24" cy="30" r="7"/><circle cx="24" cy="15" r="3"/></svg>
+            </span>
+            <h3>Clubes</h3>
+            <p>Sets de 2 a 4 h. Warm up, peak time o closing con selección a medida.</p>
+          </article>
+          <article class="format reveal">
+            <span class="format__ico" aria-hidden="true">
+              <svg viewBox="0 0 48 48"><path d="M6 40 24 8l18 32z"/><path d="M18 40l6-12 6 12"/><path d="M24 8V3"/></svg>
+            </span>
+            <h3>Festivales</h3>
+            <p>Escenario principal o soundclash. Experiencia en carteles internacionales.</p>
+          </article>
+          <article class="format reveal">
+            <span class="format__ico" aria-hidden="true">
+              <svg viewBox="0 0 48 48"><rect x="6" y="14" width="36" height="26" rx="3"/><path d="M17 14V9h14v5M6 24h36"/></svg>
+            </span>
+            <h3>Empresas y privados</h3>
+            <p>Lanzamientos, activaciones de marca, bodas y fiestas con buena vibra.</p>
+          </article>
+        </div>
+
+        <div class="booking__grid">
+          <form class="form reveal" id="bookingForm" novalidate>
+            <div class="form__row">
+              <label class="field"><span>Nombre *</span><input name="nombre" required autocomplete="name" placeholder="Tu nombre"></label>
+              <label class="field"><span>Email *</span><input name="email" type="email" required autocomplete="email" placeholder="tu@correo.com"></label>
+            </div>
+            <div class="form__row">
+              <label class="field"><span>Teléfono / WhatsApp</span><input name="telefono" type="tel" autocomplete="tel" placeholder="+506 …"></label>
+              <label class="field"><span>Organización / Venue</span><input name="organizacion" placeholder="Club, festival o empresa"></label>
+            </div>
+
+            <fieldset class="field field--chips">
+              <legend>Tipo de evento *</legend>
+              <div class="pick">
+                <label><input type="radio" name="tipo" value="Club" required><span>Club</span></label>
+                <label><input type="radio" name="tipo" value="Festival"><span>Festival</span></label>
+                <label><input type="radio" name="tipo" value="Empresa / Marca"><span>Empresa</span></label>
+                <label><input type="radio" name="tipo" value="Evento privado"><span>Privado</span></label>
+              </div>
+            </fieldset>
+
+            <div class="form__row form__row--3">
+              <label class="field"><span>Fecha *</span><input name="fecha" type="date" required></label>
+              <label class="field"><span>Ciudad / País *</span><input name="ciudad" required placeholder="San José, CR"></label>
+              <label class="field"><span>Asistentes</span>
+                <select name="aforo">
+                  <option value="">Seleccioná</option>
+                  <option>Menos de 100</option>
+                  <option>100 – 500</option>
+                  <option>500 – 2.000</option>
+                  <option>Más de 2.000</option>
+                </select>
+              </label>
+            </div>
+            <label class="field"><span>Contanos del evento</span><textarea name="mensaje" rows="4" placeholder="Horario, duración del set, estilo que buscás, equipo disponible…"></textarea></label>
+
+            <button type="submit" class="btn btn--gold btn--block magnetic"><span>Enviar solicitud</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+            <p class="form__note">Al enviar se abre tu correo con la solicitud lista. ¿Preferís directo? Escribí a <a href="mailto:calldidocta@gmail.com">calldidocta@gmail.com</a></p>
+            <div class="form__ok" role="status" aria-live="polite"></div>
+          </form>
+
+          <aside class="contact reveal">
+            <h3>Contacto directo</h3>
+            <a class="contact__item" href="mailto:calldidocta@gmail.com?subject=Contrataci%C3%B3n%20Docta%20Rythm">
+              <span class="contact__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
+              <span><small>Booking</small>calldidocta@gmail.com</span>
+            </a>
+            <a class="contact__item" href="https://ig.me/m/doctarythmselecta" target="_blank" rel="noopener">
+              <span class="contact__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></span>
+              <span><small>Mensaje directo</small>@doctarythmselecta</span>
+            </a>
+            <div class="contact__base">
+              <p><b>Base:</b> San José, Costa Rica</p>
+              <p><b>Disponible para:</b> todo CR, Centroamérica y giras internacionales.</p>
+            </div>
+            <a class="btn btn--line btn--block" href="#prensa">Ver kit de prensa</a>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PRESS ============ -->
+    <section class="section press" id="prensa">
+      <div class="wrap press__grid">
+        <div class="press__visual reveal">
+          <div class="press__doc">
+            <img src="assets/img/decks-smile.jpg" alt="" loading="lazy">
+            <span class="press__doc-tag">EPK 2026</span>
+            <strong>DOCTA RYTHM<br>SELECTA</strong>
+          </div>
+        </div>
+        <div class="press__txt">
+          <p class="eyebrow reveal">07 — Kit de prensa</p>
+          <h2 class="h2 reveal-lines">Todo para tu <em>promo.</em></h2>
+          <p class="reveal">Bio corta y larga, fotos oficiales, logos, datos de contacto y requerimientos técnicos en un solo lugar.</p>
+          <div class="press__btns reveal">
+            <a class="btn btn--gold magnetic" href="assets/press/docta-rythm-presskit.pdf" download><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg><span>Descargar EPK (PDF)</span></a>
+            <a class="btn btn--ghost magnetic" href="assets/press/docta-rythm-fotos.zip" download><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="m21 16-5-5-9 8"/></svg><span>Fotos HD (ZIP)</span></a>
+          </div>
+          <button class="copy-bio reveal" id="copyBio" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3"/></svg><span>Copiar bio corta</span></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FINAL CTA ============ -->
+    <section class="final">
+      <div class="wrap">
+        <p class="hero__script reveal">¿Listos para la medicina?</p>
+        <a href="#contrataciones" class="final__big magnetic" data-cursor="BOOK">
+          <span>CALL DI</span><span>DOCTA</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer__grid">
+      <div>
+        <a href="#inicio" class="nav__logo"><span class="logo-disc" aria-hidden="true"></span><span class="nav__word">DOCTA RYTHM<small>SELECTA</small></span></a>
+        <p class="footer__tag">Serenity hidden in the city.</p>
+      </div>
+      <div class="footer__social" data-social></div>
+      <p class="footer__copy">© 2005–<span id="year">2026</span> Docta Rythm Selecta · Call Di Docta Movement · San José, Costa Rica</p>
+    </div>
+    <div class="footer__stripes" aria-hidden="true"><i></i><i></i><i></i></div>
+  </footer>
+
+  <!-- Mobile sticky CTA -->
+  <div class="sticky-cta">
+    <a href="#musica" class="sticky-cta__play" aria-label="Escuchar sesiones"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></a>
+    <a href="#contrataciones" class="btn btn--gold btn--block">Contratar a Docta Rythm</a>
+  </div>
+
+  <!-- Video modal -->
+  <div class="modal" id="vModal" aria-hidden="true" role="dialog" aria-label="Video">
+    <div class="modal__inner"><div class="modal__frame"></div></div>
+    <button class="modal__close" aria-label="Cerrar video"><span></span><span></span></button>
+  </div>
+
+  <div class="toast" role="status" aria-live="polite"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script src="https://w.soundcloud.com/player/api.js"></script>
+  <script src="assets/js/main.js?v=1"></script>
+</body>
+</html>
