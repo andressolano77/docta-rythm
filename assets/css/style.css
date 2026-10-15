@@ -659,3 +659,63 @@ strong { color: var(--bone); font-weight: 700; }
 .modal__frame { position: relative; }
 .modal__yt { position: absolute; left: 0; right: 0; top: calc(100% + 14px); text-align: center; font-size: .85rem; font-weight: 700; color: var(--gold); }
 .vcard[data-ext] .vcard__tag::after { content: " ↗ YouTube"; color: var(--bone); }
+
+/* ---------- Radio en vivo (flotante) ---------- */
+.radio {
+  position: fixed; left: 16px; bottom: calc(16px + env(safe-area-inset-bottom)); z-index: 96;
+  display: flex; align-items: center; gap: 12px;
+  max-width: min(420px, calc(100vw - 32px)); padding: 8px 14px 8px 8px; border-radius: 999px;
+  background: rgba(19,17,13,.88); backdrop-filter: blur(14px) saturate(140%); -webkit-backdrop-filter: blur(14px) saturate(140%);
+  border: 1px solid var(--line); box-shadow: 0 18px 50px rgba(0,0,0,.5);
+  transform: translateY(160%); transition: transform .7s var(--ease), border-color .4s;
+}
+.radio.is-ready { transform: none; }
+.radio[data-state="playing"] { border-color: rgba(246,196,41,.45); }
+.radio__btn {
+  position: relative; flex: none; width: 46px; height: 46px; border-radius: 50%;
+  background: var(--gold); color: var(--ink); display: grid; place-items: center;
+  transition: transform .3s var(--ease);
+}
+.radio__btn:hover { transform: scale(1.08); }
+.radio__btn svg { width: 20px; height: 20px; fill: currentColor; stroke: none; }
+.radio__btn .i-pause, .radio__spin { display: none; }
+.radio[data-state="playing"] .radio__btn .i-play { display: none; }
+.radio[data-state="playing"] .radio__btn .i-pause { display: block; }
+.radio[data-state="loading"] .radio__btn svg { display: none; }
+.radio[data-state="loading"] .radio__spin { display: block; width: 20px; height: 20px; border-radius: 50%; border: 2.5px solid rgba(11,10,8,.25); border-top-color: var(--ink); animation: spin .8s linear infinite; }
+.radio[data-state="blocked"] .radio__btn { animation: ring 1.8s infinite; }
+.radio__info { min-width: 0; display: grid; gap: 1px; line-height: 1.25; }
+.radio__label { display: flex; align-items: center; gap: 7px; font-size: .64rem; font-weight: 800; text-transform: uppercase; letter-spacing: .14em; color: var(--muted); white-space: nowrap; }
+.radio__label b { color: var(--gold); font-weight: 800; }
+.radio__dot { width: 7px; height: 7px; border-radius: 50%; background: var(--muted); flex: none; display: inline-block; }
+.radio[data-state="playing"] .radio__dot, .radio-cta .radio__dot { background: var(--red); animation: pulse 1.6s infinite; }
+.radio__now { overflow: hidden; white-space: nowrap; max-width: 230px; mask-image: linear-gradient(90deg, #000 85%, transparent); -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent); }
+.radio__now-txt { display: inline-block; font-weight: 700; font-size: .88rem; color: var(--bone); }
+.radio__now.is-long .radio__now-txt { padding-right: 40px; animation: radioScroll 14s linear infinite; }
+@keyframes radioScroll { 0%, 15% { transform: translateX(0); } 85%, 100% { transform: translateX(var(--shift, -50%)); } }
+.radio__eq { display: flex; align-items: flex-end; gap: 3px; height: 18px; flex: none; }
+.radio__eq i { width: 3px; height: 25%; border-radius: 2px; background: var(--gold); }
+.radio[data-state="playing"] .radio__eq i { animation: bars .8s ease-in-out infinite alternate; }
+.radio__eq i:nth-child(2) { animation-delay: -.2s !important; background: var(--green); }
+.radio__eq i:nth-child(3) { animation-delay: -.5s !important; background: var(--red); }
+.radio__eq i:nth-child(4) { animation-delay: -.35s !important; }
+.radio__vol { display: none; width: 72px; accent-color: var(--gold); cursor: pointer; }
+.radio__ext { flex: none; width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; color: var(--muted); transition: color .3s, background .3s; }
+.radio__ext:hover { color: var(--ink); background: var(--gold); }
+.radio__ext svg { width: 15px; height: 15px; }
+.radio-cta { display: inline-flex; align-items: center; gap: 8px; margin-top: 16px; font-weight: 700; color: var(--bone); padding: 10px 16px; border-radius: 999px; border: 1.5px solid var(--line); transition: border-color .3s, color .3s; }
+.radio-cta:hover { border-color: var(--gold); color: var(--gold); }
+@media (min-width: 1000px) {
+  .radio { left: auto; right: 24px; bottom: 24px; max-width: 480px; }
+  .radio__info { flex: 1; }
+  .radio__vol { display: block; }
+  .hero__scroll { bottom: 130px; }
+}
+@media (max-width: 999px) {
+  /* encima de la barra fija de "Contratar" */
+  .radio { left: 12px; right: 12px; max-width: none; bottom: calc(84px + env(safe-area-inset-bottom)); transition: transform .7s var(--ease), bottom .5s var(--ease); }
+  body:not(.has-sticky) .radio { bottom: calc(12px + env(safe-area-inset-bottom)); }
+  .radio__info { flex: 1; }
+  .radio__now { max-width: none; }
+  .footer { padding-bottom: 160px; }
+}

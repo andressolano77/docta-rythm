@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wdth,wght@62..125,400..900&family=Permanent+Marker&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css?v=1">
+  <link rel="stylesheet" href="assets/css/style.css?v=3">
 </head>
 <body class="is-loading">
 
@@ -159,7 +159,7 @@
           <p class="section__sub reveal">Mixtapes, riddims y sets grabados en vivo. Elegí una sesión y el tocadiscos hace el resto.</p>
         </div>
 
-        <div class="deck reveal">
+        <div class="deck reveal" data-no-autoradio>
           <div class="deck__table">
             <div class="deck__platter">
               <div class="vinyl" id="vinyl">
@@ -192,11 +192,12 @@
           </div>
         </div>
 
-        <div class="spotify reveal">
+        <div class="spotify reveal" data-no-autoradio>
           <div class="spotify__txt">
             <p class="eyebrow">También en Spotify</p>
             <p>Producciones y riddims de Call Di Docta Records.</p>
             <a class="link-arrow" href="https://soundcloud.com/doctarythmselecta" target="_blank" rel="noopener">Ver las 108 sesiones en SoundCloud →</a>
+            <button class="radio-cta" type="button" data-radio-play><i class="radio__dot"></i> Escuchar Call Di Docta Radio 24/7</button>
           </div>
           <iframe title="Docta Rythm en Spotify" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
             src="https://open.spotify.com/embed/artist/25P6JrY91mpiTqMJ50JpEH?utm_source=generator&amp;theme=0"></iframe>
@@ -215,7 +216,7 @@
           <a href="https://www.youtube.com/@CallDiDoctaMovement" target="_blank" rel="noopener" class="link-arrow reveal">Canal Call Di Docta Movement →</a>
         </div>
 
-        <div class="vgrid">
+        <div class="vgrid" data-no-autoradio>
           <button class="vcard vcard--feat reveal" data-yt="wGGGM6Zz1qA" data-ext>
             <img src="https://i.ytimg.com/vi/wGGGM6Zz1qA/hqdefault.jpg" alt="" loading="lazy">
             <span class="vcard__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
@@ -461,14 +462,31 @@
 
   <!-- Mobile sticky CTA -->
   <div class="sticky-cta">
-    <a href="#musica" class="sticky-cta__play" aria-label="Escuchar sesiones"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></a>
+    <a href="#musica" data-no-autoradio class="sticky-cta__play" aria-label="Escuchar sesiones"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></a>
     <a href="#contrataciones" class="btn btn--gold btn--block">Contratar a Docta Rythm</a>
   </div>
 
   <!-- Video modal -->
-  <div class="modal" id="vModal" aria-hidden="true" role="dialog" aria-label="Video">
+  <div class="modal" id="vModal" data-no-autoradio aria-hidden="true" role="dialog" aria-label="Video">
     <div class="modal__inner"><div class="modal__frame"></div></div>
     <button class="modal__close" aria-label="Cerrar video"><span></span><span></span></button>
+  </div>
+
+  <!-- Radio en vivo (Zeno.fm) -->
+  <div class="radio" id="radio" data-state="idle" role="region" aria-label="Call Di Docta Radio en vivo">
+    <button class="radio__btn" id="radioBtn" aria-label="Reproducir radio">
+      <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+      <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>
+      <span class="radio__spin" aria-hidden="true"></span>
+    </button>
+    <div class="radio__info">
+      <span class="radio__label"><i class="radio__dot"></i>Call Di Docta Radio · <b class="radio__status">En vivo</b></span>
+      <span class="radio__now"><span class="radio__now-txt" id="radioNow">Reggae · Dancehall · Dub 24/7</span></span>
+    </div>
+    <div class="radio__eq" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <input class="radio__vol" id="radioVol" type="range" min="0" max="1" step="0.01" value="0.8" aria-label="Volumen de la radio">
+    <a class="radio__ext" href="https://zeno.fm/radio/call-di-docta-radio/" target="_blank" rel="noopener" aria-label="Abrir la radio en Zeno.fm"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+    <audio id="radioAudio" preload="none"></audio>
   </div>
 
   <div class="toast" role="status" aria-live="polite"></div>
@@ -477,6 +495,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
   <script src="https://w.soundcloud.com/player/api.js"></script>
-  <script src="assets/js/main.js?v=1"></script>
+  <script src="assets/js/main.js?v=3"></script>
 </body>
 </html>

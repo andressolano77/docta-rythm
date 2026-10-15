@@ -26,6 +26,7 @@
 
   const $ = (s, c = document) => c.querySelector(s);
   const $$ = (s, c = document) => [...c.querySelectorAll(s)];
+  const mediaStarted = src => window.dispatchEvent(new CustomEvent('docta:media', { detail: src }));
   const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const finePointer = matchMedia('(hover: hover) and (pointer: fine)').matches;
   const hasGSAP = typeof window.gsap !== 'undefined' && typeof window.ScrollTrigger !== 'undefined';
@@ -127,6 +128,7 @@
     countEl.textContent = '100';
     document.body.classList.remove('is-loading');
     if (lenis) lenis.start();
+    setTimeout(radioAutostart, animOn ? 1600 : 300);
     if (!animOn) { pre.remove(); afterIntro(); return; }
     const tl = gsap.timeline({ onComplete: afterIntro });
     tl.to('.preloader__vinyl, .preloader__txt, .preloader__count', { y: -30, opacity: 0, duration: .5, stagger: .05, ease: 'power2.in' })
@@ -212,7 +214,9 @@
     nav.classList.toggle('is-hidden', y > 400 && y > lastY && !document.body.classList.contains('menu-open'));
     const bookTop = $('#contrataciones').getBoundingClientRect();
     const inBooking = bookTop.top < innerHeight * .6 && bookTop.bottom > innerHeight * .4;
-    sticky.classList.toggle('is-on', y > innerHeight * .8 && !inBooking);
+    const stickyOn = y > innerHeight * .8 && !inBooking;
+    sticky.classList.toggle('is-on', stickyOn);
+    document.body.classList.toggle('has-sticky', stickyOn);
     lastY = y;
   };
   addEventListener('scroll', onScroll, { passive: true }); onScroll();
@@ -391,7 +395,8 @@
     vinyl.classList.toggle('is-spinning', p);
     arm.classList.toggle('is-on', p);
     $('#deckPlay').setAttribute('aria-label', p ? 'Pausar' : 'Reproducir');
-    eqBoost = p ? 1 : 0;
+    eqBoost = p || radioEl.dataset.state === 'playing' ? 1 : 0;
+    if (p) mediaStarted('soundcloud');
   };
   const bindWidget = () => {
     if (widget || typeof window.SC === 'undefined' || !scFrame) return;
@@ -426,6 +431,7 @@
   function openModal(id) {
     frame.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&modestbranding=1" title="Video de Docta Rythm" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe><a class="modal__yt" href="https://www.youtube.com/watch?v=${id}" target="_blank" rel="noopener">¿No carga? Ver en YouTube ↗</a>`;
     modal.classList.add('is-open'); modal.setAttribute('aria-hidden', 'false');
+    mediaStarted('youtube');
     if (widget && playing) widget.pause();
     if (lenis) lenis.stop();
     $('.modal__close', modal).focus();
@@ -438,11 +444,139 @@
   }
   // Videos con música protegida no permiten embed: se abren en YouTube
   $$('[data-yt]').forEach(b => b.addEventListener('click', () => {
-    if (b.hasAttribute('data-ext')) window.open(`https://www.youtube.com/watch?v=${b.dataset.yt}`, '_blank', 'noopener');
+    if (b.hasAttribute('data-ext')) mediaStarted('youtube'), window.open(`https://www.youtube.com/watch?v=${b.dataset.yt}`, '_blank', 'noopener');
     else openModal(b.dataset.yt);
   }));
   $('.modal__close', modal).addEventListener('click', closeModal);
   modal.addEventListener('click', e => { if (e.target === modal || e.target.classList.contains('modal__inner')) closeModal(); });
+
+
+  // ---- Radio en vivo (Zeno.fm) --------------------------------
+  // Intenta sonar al entrar. Los navegadores bloquean audio con sonido sin
+  // interacción previa: en ese caso arranca con el primer clic / toque.
+  // Se detiene sola cuando suena SoundCloud, YouTube o Spotify.
+  const RADIO_STREAM = 'https://stream.zeno.fm/vkbolopgeo5uv';
+  const RADIO_META = 'https://api.zeno.fm/mounts/metadata/subscribe/vkbolopgeo5uv';
+  const radioEl = $('#radio');
+  const audio = $('#radioAudio');
+  const rBtn = $('#radioBtn');
+  const rNow = $('#radioNow');
+  const rVol = $('#radioVol');
+  const rStatus = $('.radio__status', radioEl);
+  let radioWanted = true;
+  let radioRetry = 0;
+  let meta = null;
+  try { if (sessionStorage.getItem('doctaRadio') === 'off') radioWanted = false; } catch {}
+
+  const setRadio = st => {
+    radioEl.dataset.state = st;
+    rBtn.setAttribute('aria-label', st === 'playing' || st === 'loading' ? 'Pausar radio' : 'Reproducir radio');
+    rStatus.textContent = st === 'blocked' ? 'Tocá para escuchar' : st === 'error' ? 'Sin señal' : 'En vivo';
+    eqBoost = st === 'playing' || playing ? 1 : 0;
+  };
+
+  function radioPlay() {
+    mediaStarted('radio');
+    setRadio('loading');
+    audio.src = RADIO_STREAM;
+    audio.volume = +rVol.value;
+    const pr = audio.play();
+    if (pr && pr.then) {
+      pr.then(() => { radioRetry = 0; startMeta(); }).catch(err => {
+        if (err.name === 'NotAllowedError') { radioStop('blocked'); armUnlock(); }
+        else if (err.name !== 'AbortError') setRadio('error');
+      });
+    }
+  }
+  function radioStop(state = 'idle') {
+    audio.pause();
+    audio.removeAttribute('src');
+    audio.load(); // corta la descarga del stream
+    stopMeta();
+    setRadio(state);
+  }
+  audio.addEventListener('playing', () => setRadio('playing'));
+  audio.addEventListener('waiting', () => { if (radioEl.dataset.state === 'playing') setRadio('loading'); });
+  audio.addEventListener('error', () => {
+    if (!audio.getAttribute('src')) return;
+    if (radioRetry++ < 2) setTimeout(() => { if (radioWanted) radioPlay(); }, 2500);
+    else radioStop('error');
+  });
+
+  // Desbloqueo con el primer gesto (excepto si el gesto es para otro reproductor)
+  const unlockEvents = ['pointerdown', 'keydown', 'touchend'];
+  let armed = false;
+  function onFirstGesture(e) {
+    if (!radioWanted) return disarmUnlock();
+    const t = e.target && e.target.closest ? e.target : null;
+    if (t && t.closest('[data-no-autoradio], .radio, [data-radio-play]')) return;
+    disarmUnlock();
+    radioPlay();
+  }
+  function armUnlock() {
+    if (armed) return; armed = true;
+    unlockEvents.forEach(ev => document.addEventListener(ev, onFirstGesture, true));
+  }
+  function disarmUnlock() {
+    armed = false;
+    unlockEvents.forEach(ev => document.removeEventListener(ev, onFirstGesture, true));
+  }
+
+  function radioAutostart() {
+    radioEl.classList.add('is-ready');
+    if (radioWanted && radioEl.dataset.state === 'idle') radioPlay();
+  }
+
+  // Otro audio empezó → la radio cede
+  window.addEventListener('docta:media', e => {
+    if (e.detail === 'radio') { if (widget && playing) widget.pause(); return; }
+    radioWanted = false;
+    disarmUnlock();
+    if (radioEl.dataset.state !== 'idle') radioStop();
+  });
+  // Spotify no expone eventos: si el foco entra a su iframe, asumimos que se va a reproducir
+  addEventListener('blur', () => setTimeout(() => {
+    const a = document.activeElement;
+    if (a && a.tagName === 'IFRAME' && a.closest('.spotify')) mediaStarted('spotify');
+  }, 0));
+
+  rBtn.addEventListener('click', () => {
+    const st = radioEl.dataset.state;
+    if (st === 'playing' || st === 'loading') {
+      radioWanted = false; radioStop();
+      try { sessionStorage.setItem('doctaRadio', 'off'); } catch {}
+    } else {
+      radioWanted = true; radioPlay();
+      try { sessionStorage.removeItem('doctaRadio'); } catch {}
+    }
+  });
+  $$('[data-radio-play]').forEach(b => b.addEventListener('click', () => { radioWanted = true; radioPlay(); }));
+  rVol.addEventListener('input', () => { audio.volume = +rVol.value; });
+
+  // "Sonando ahora" en vivo
+  function setNow(t) {
+    rNow.textContent = t;
+    const box = rNow.parentElement;
+    box.classList.remove('is-long');
+    requestAnimationFrame(() => {
+      const over = rNow.scrollWidth - box.clientWidth;
+      if (over > 4) { box.style.setProperty('--shift', -(over + 40) + 'px'); box.classList.add('is-long'); }
+    });
+    if ('mediaSession' in navigator && window.MediaMetadata) {
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title: t, artist: 'Call Di Docta Radio', album: 'Docta Rythm Selecta',
+        artwork: [{ src: 'assets/img/profile.jpg', sizes: '304x304', type: 'image/jpeg' }]
+      });
+    }
+  }
+  function startMeta() {
+    if (meta || !window.EventSource) return;
+    meta = new EventSource(RADIO_META);
+    meta.onmessage = e => {
+      try { const t = (JSON.parse(e.data).streamTitle || '').replace(/_+/g, ' ').trim(); if (t) setNow(t); } catch {}
+    };
+  }
+  function stopMeta() { if (meta) { meta.close(); meta = null; } }
 
   // ---- Agenda: ocultar fechas pasadas + flyer que sigue al mouse
   const today = new Date(); today.setHours(0, 0, 0, 0);
