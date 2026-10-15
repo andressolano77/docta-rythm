@@ -774,3 +774,5 @@ strong { color: var(--bone); font-weight: 700; }
   .radio__ext { display: none; }
   .radio:not([data-state="playing"]) .radio__eq { display: none; }
 }
+/* Honeypot antispam: invisible para personas */
+.hp { position: absolute !important; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden; }

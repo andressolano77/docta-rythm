@@ -2,6 +2,8 @@
 <html lang="es">
 <head>
   <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://w.soundcloud.com; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https://i.ytimg.com; media-src https://stream.zeno.fm https://*.zeno.fm https://*.zenomedia.com https://*.surfernetwork.com; connect-src 'self' https://api.zeno.fm; frame-src https://w.soundcloud.com https://open.spotify.com https://www.youtube-nocookie.com; form-action 'none'; base-uri 'self'; object-src 'none'; worker-src 'none'; upgrade-insecure-requests">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Docta Rythm Selecta — El Doctor del Ritmo</title>
   <meta name="description" content="Docta Rythm Selecta: selecta de reggae roots, dancehall, dub y ska desde San José, Costa Rica. Sesiones, videos, agenda y contrataciones para clubes, festivales y empresas.">
@@ -12,10 +14,10 @@
   <meta property="og:type" content="website">
   <link rel="icon" href="assets/img/logo/favicon-32.png" type="image/png" sizes="32x32">
   <link rel="apple-touch-icon" href="assets/img/logo/favicon-180.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wdth,wght@62..125,400..900&family=Permanent+Marker&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css?v=9">
+  <link rel="preload" href="assets/fonts/anton-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/archivo-var-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/css/fonts.css?v=1">
+  <link rel="stylesheet" href="assets/css/style.css?v=10">
 </head>
 <body class="is-loading">
 
@@ -189,7 +191,7 @@
               <li><button class="track" data-url="https://soundcloud.com/doctarythmselecta/sets/call-di-docta-riddim-2022" data-title="Call Di Docta Riddim"><span class="track__n">07</span><span class="track__t">Call Di Docta Riddim<small>Riddim · 2022</small></span><span class="track__bars"><i></i><i></i><i></i></span></button></li>
             </ol>
             <div class="sc-wrap">
-              <iframe id="scPlayer" title="Reproductor de SoundCloud" allow="autoplay" loading="lazy"
+              <iframe id="scPlayer" title="Reproductor de SoundCloud" allow="autoplay" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"
                 src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/doctarythmselecta/tok-official-promo-mixtape-by-docta-rythm-selecta2018&amp;color=%23f6c429&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=true&amp;show_reposts=false&amp;visual=false"></iframe>
             </div>
           </div>
@@ -202,7 +204,7 @@
             <a class="link-arrow" href="https://soundcloud.com/doctarythmselecta" target="_blank" rel="noopener">Ver las 108 sesiones en SoundCloud →</a>
             <button class="radio-cta" type="button" data-radio-play><i class="radio__dot"></i> Call Di Docta Radio 24/7</button>
           </div>
-          <iframe title="Docta Rythm en Spotify" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          <iframe title="Docta Rythm en Spotify" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
             src="https://open.spotify.com/embed/artist/25P6JrY91mpiTqMJ50JpEH?utm_source=generator&amp;theme=0"></iframe>
         </div>
       </div>
@@ -358,13 +360,14 @@
 
         <div class="booking__grid">
           <form class="form reveal" id="bookingForm" novalidate>
+            <div class="hp" aria-hidden="true"><label>No completar<input name="website" tabindex="-1" autocomplete="off"></label></div>
             <div class="form__row">
-              <label class="field"><span>Nombre *</span><input name="nombre" required autocomplete="name" placeholder="Tu nombre"></label>
-              <label class="field"><span>Email *</span><input name="email" type="email" required autocomplete="email" placeholder="tu@correo.com"></label>
+              <label class="field"><span>Nombre *</span><input name="nombre" required maxlength="100" autocomplete="name" placeholder="Tu nombre"></label>
+              <label class="field"><span>Email *</span><input name="email" type="email" required maxlength="254" autocomplete="email" placeholder="tu@correo.com"></label>
             </div>
             <div class="form__row">
-              <label class="field"><span>Teléfono / WhatsApp</span><input name="telefono" type="tel" autocomplete="tel" placeholder="+506 …"></label>
-              <label class="field"><span>Organización / Venue</span><input name="organizacion" placeholder="Club, festival o empresa"></label>
+              <label class="field"><span>Teléfono / WhatsApp</span><input name="telefono" type="tel" maxlength="30" autocomplete="tel" placeholder="+506 …"></label>
+              <label class="field"><span>Organización / Venue</span><input name="organizacion" maxlength="120" placeholder="Club, festival o empresa"></label>
             </div>
 
             <fieldset class="field field--chips">
@@ -379,7 +382,7 @@
 
             <div class="form__row form__row--3">
               <label class="field"><span>Fecha *</span><input name="fecha" type="date" required></label>
-              <label class="field"><span>Ciudad / País *</span><input name="ciudad" required placeholder="San José, CR"></label>
+              <label class="field"><span>Ciudad / País *</span><input name="ciudad" required maxlength="100" placeholder="San José, CR"></label>
               <label class="field"><span>Asistentes</span>
                 <select name="aforo">
                   <option value="">Seleccioná</option>
@@ -390,7 +393,7 @@
                 </select>
               </label>
             </div>
-            <label class="field"><span>Contanos del evento</span><textarea name="mensaje" rows="4" placeholder="Horario, duración del set, estilo que buscás, equipo disponible…"></textarea></label>
+            <label class="field"><span>Contanos del evento</span><textarea name="mensaje" rows="4" maxlength="2000" placeholder="Horario, duración del set, estilo que buscás, equipo disponible…"></textarea></label>
 
             <button type="submit" class="btn btn--gold btn--block magnetic"><span>Enviar solicitud</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
             <p class="form__note">Al enviar se abre tu correo con la solicitud lista. ¿Preferís directo? Escribí a <a href="mailto:calldidocta@gmail.com">calldidocta@gmail.com</a></p>
@@ -495,10 +498,12 @@
 
   <div class="toast" role="status" aria-live="polite"></div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+  <!-- Librerías alojadas localmente (verificadas contra los hashes de cdnjs / jsDelivr) -->
+  <script src="assets/js/vendor/gsap.min.js?v=3.12.5"></script>
+  <script src="assets/js/vendor/ScrollTrigger.min.js?v=3.12.5"></script>
+  <script src="assets/js/vendor/lenis.min.js?v=1.1.13"></script>
+  <!-- API oficial de SoundCloud: sin versión fija (riesgo aceptado, acotado por la CSP) -->
   <script src="https://w.soundcloud.com/player/api.js"></script>
-  <script src="assets/js/main.js?v=6"></script>
+  <script src="assets/js/main.js?v=7"></script>
 </body>
 </html>

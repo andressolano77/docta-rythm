@@ -8,6 +8,7 @@
   const BOOKING_EMAIL = 'calldidocta@gmail.com';
   // Si se configura un endpoint (Formspree, Getform, etc.) el formulario
   // se envía por POST sin abrir el correo. Ej: 'https://formspree.io/f/xxxxxx'
+  // Debe ser https y su origen tiene que agregarse a connect-src en la CSP de index.html.
   const FORM_ENDPOINT = '';
   const SHORT_BIO = 'Docta Rythm Selecta, "El Doctor del Ritmo", es selecta, productor y radio host de San José, Costa Rica. Desde 2005 mueve pistas con reggae roots, dancehall, dub, rocksteady y ska. Fundador de Call Di Docta Records y Dancehall Madness CR, parte de The Aces Sounds, y con presencia en el Rototom Sunsplash 2025. Ha compartido cartel con Sizzla, Gentleman, T.O.K., Mr. Vegas y Capleton.';
 
@@ -46,32 +47,49 @@
   const yearEl = $('#year'); if (yearEl) yearEl.textContent = new Date().getFullYear();
 
   // ---- Split text helpers -------------------------------------
+  // Construido con DOM (textContent), sin reinterpretar texto como HTML
   $$('.split').forEach(el => {
-    el.innerHTML = [...el.textContent].map(c => `<span class="ch">${c === ' ' ? '&nbsp;' : c}</span>`).join('');
+    el.replaceChildren(...[...el.textContent].map(c => {
+      const s = document.createElement('span');
+      s.className = 'ch';
+      s.textContent = c === ' ' ? '\u00a0' : c;
+      return s;
+    }));
   });
 
   // Agrupa palabras en líneas visuales para el reveal de títulos
+  const splitSrc = new WeakMap();
   function splitLines(el) {
-    if (!el.dataset.src) el.dataset.src = el.innerHTML;
-    el.innerHTML = el.dataset.src;
+    if (!splitSrc.has(el)) splitSrc.set(el, el.cloneNode(true));
     const words = [];
-    const walk = (node, wrapEm) => {
-      [...node.childNodes].forEach(n => {
-        if (n.nodeType === 3) {
-          n.textContent.split(/(\s+)/).forEach(w => { if (w.trim()) words.push({ w, em: wrapEm }); });
-        } else if (n.nodeType === 1) walk(n, wrapEm || n.tagName === 'EM');
-      });
+    const walk = (node, em) => node.childNodes.forEach(n => {
+      if (n.nodeType === 3) n.textContent.split(/\s+/).forEach(w => { if (w) words.push({ w, em }); });
+      else if (n.nodeType === 1) walk(n, em || n.tagName === 'EM');
+    });
+    walk(splitSrc.get(el), false);
+    const wordEl = o => {
+      const span = document.createElement('span');
+      span.className = 'wd';
+      if (o.em) { const e = document.createElement('em'); e.textContent = o.w; span.append(e); }
+      else span.textContent = o.w;
+      return span;
     };
-    walk(el, false);
-    el.innerHTML = words.map(o => `<span class="wd">${o.em ? `<em>${o.w}</em>` : o.w}</span>`).join(' ');
+    el.replaceChildren(...words.flatMap((o, i) => (i ? [' ', wordEl(o)] : [wordEl(o)])));
     const lines = [];
     let top = null;
     $$('.wd', el).forEach(w => {
       const t = w.offsetTop;
       if (top === null || Math.abs(t - top) > 4) { lines.push([]); top = t; }
-      lines[lines.length - 1].push(w.innerHTML);
+      lines[lines.length - 1].push(w);
     });
-    el.innerHTML = lines.map(l => `<span class="ln"><span>${l.join(' ')}</span></span>`).join('');
+    el.replaceChildren(...lines.map(l => {
+      const ln = document.createElement('span');
+      const inner = document.createElement('span');
+      ln.className = 'ln';
+      l.forEach((w, i) => { if (i) inner.append(' '); inner.append(...w.childNodes); });
+      ln.append(inner);
+      return ln;
+    }));
   }
 
   // ---- Smooth scroll (Lenis) ----------------------------------
@@ -445,8 +463,22 @@
   // ---- Video modal --------------------------------------------
   const modal = $('#vModal');
   const frame = $('.modal__frame', modal);
+  const YT_ID = /^[\w-]{11}$/;
   function openModal(id) {
-    frame.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&modestbranding=1" title="Video de Docta Rythm" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe><a class="modal__yt" href="https://www.youtube.com/watch?v=${id}" target="_blank" rel="noopener">¿No carga? Ver en YouTube ↗</a>`;
+    if (!YT_ID.test(id)) return;
+    const f = document.createElement('iframe');
+    f.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&modestbranding=1`;
+    f.title = 'Video de Docta Rythm';
+    f.referrerPolicy = 'strict-origin-when-cross-origin';
+    f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+    f.allowFullscreen = true;
+    const a = document.createElement('a');
+    a.className = 'modal__yt';
+    a.href = `https://www.youtube.com/watch?v=${id}`;
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.textContent = '¿No carga? Ver en YouTube ↗';
+    frame.replaceChildren(f, a);
     modal.classList.add('is-open'); modal.setAttribute('aria-hidden', 'false');
     mediaStarted('youtube');
     if (widget && playing) widget.pause();
@@ -456,11 +488,12 @@
   function closeModal() {
     if (!modal.classList.contains('is-open')) return;
     modal.classList.remove('is-open'); modal.setAttribute('aria-hidden', 'true');
-    setTimeout(() => { frame.innerHTML = ''; }, 400);
+    setTimeout(() => { frame.replaceChildren(); }, 400);
     if (lenis) lenis.start();
   }
   // Videos con música protegida no permiten embed: se abren en YouTube
   $$('[data-yt]').forEach(b => b.addEventListener('click', () => {
+    if (!YT_ID.test(b.dataset.yt)) return;
     if (b.hasAttribute('data-ext')) mediaStarted('youtube'), window.open(`https://www.youtube.com/watch?v=${b.dataset.yt}`, '_blank', 'noopener');
     else openModal(b.dataset.yt);
   }));
@@ -647,6 +680,9 @@
       return;
     }
     const d = Object.fromEntries(new FormData(form));
+    // Honeypot: los bots completan el campo oculto; se descarta en silencio
+    if (d.website) { form.reset(); ok.textContent = '¡Gracias! Recibimos tu solicitud.'; ok.classList.add('is-on'); return; }
+    delete d.website;
     const subject = `Contratación Docta Rythm — ${d.tipo} — ${d.fecha} — ${d.ciudad}`;
     const body = [
       'Hola Docta, queremos contratarte:', '',
@@ -660,6 +696,7 @@
     btn.disabled = true;
     try {
       if (FORM_ENDPOINT) {
+        if (!/^https:\/\//.test(FORM_ENDPOINT)) throw new Error('FORM_ENDPOINT debe usar https');
         const r = await fetch(FORM_ENDPOINT, { method: 'POST', headers: { Accept: 'application/json', 'Content-Type': 'application/json' }, body: JSON.stringify({ ...d, _subject: subject }) });
         if (!r.ok) throw new Error('send failed');
         ok.textContent = '¡Listo! Recibimos tu solicitud. Te respondemos en 24–48 h.';

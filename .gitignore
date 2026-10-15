@@ -1,3 +1,15 @@
 .DS_Store
+Thumbs.db
 custom-security-review/
 .claude/
+press-src/
+.env
+.env.*
+*.pem
+*.key
+.npmrc
+.vscode/
+.idea/
+*.log
+*.bak
+node_modules/
